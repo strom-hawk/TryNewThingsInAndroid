@@ -46,6 +46,12 @@ class CoroutinePlayGround : ComponentActivity() {
                         testGlobalScopeWithDelay()
                     }
 
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    PrimaryButton(title = "Suspend function") {
+                        testSuspendFunctions()
+                    }
+
                     /*PrimaryButton(title = "Employee list example") {
                         CoroutineViewHolder(viewModel)
                     }*/
@@ -70,5 +76,31 @@ class CoroutinePlayGround : ComponentActivity() {
             log(TAG, "GlobalScope says hello from thread ${Thread.currentThread().name}")
         }
         log(TAG, "Hello from thread ${Thread.currentThread().name}")
+    }
+
+
+    private fun testSuspendFunctions() {
+        var firstResponse = ""
+        var secondResponse = ""
+
+        GlobalScope.launch {
+            firstResponse = firstNetworkCall()
+            secondResponse = secondNetworkCall()
+
+            log(TAG, firstResponse)
+            log(TAG, secondResponse)
+        }
+
+        log(TAG, firstResponse)
+        log(TAG, secondResponse)
+    }
+    private suspend fun firstNetworkCall(): String {
+        delay(2000L)
+        return "Response from first network call."
+    }
+
+    private suspend fun secondNetworkCall(): String {
+        delay(2000L)
+        return "Response from second network call."
     }
 }
