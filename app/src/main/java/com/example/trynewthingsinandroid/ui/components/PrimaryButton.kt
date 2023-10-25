@@ -25,10 +25,10 @@ fun PrimaryButton(
             .fillMaxWidth()
             .clickable { onClick() }
             .background(
-                brush = Brush.horizontalGradient(colors = listOf(Color(	255, 236, 217), Color(	238, 120, 110))),
+                brush = Brush.horizontalGradient(colors = listOf(Color(	238, 166, 110), Color(	238, 120, 110))),
                 shape = RoundedCornerShape(12.dp)
             )
-            .padding(vertical = 12.dp),
+            .padding(vertical = 8.dp),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
