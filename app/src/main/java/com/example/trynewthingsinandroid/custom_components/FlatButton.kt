@@ -6,12 +6,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.mutableStateOf
@@ -20,20 +17,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.text.ExperimentalTextApi
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.trynewthingsinandroid.utils.ColorSystem
 
 /**
  * Created by Saurav Suman on 26/12/23.
  */
+
 @Composable
-fun ElevatedButton(
+fun FlatButton(
     text: String,
     width: Dp = 150.dp,
     height: Dp = 36.dp,
@@ -67,7 +61,22 @@ fun ElevatedButton(
             )
     ) {
         if (show.value) {
-            PopUpButton(
+            SimpleButton(
+                width = width,
+                height = height,
+                backgroundColor = backgroundColor,
+                faceColor = faceColor,
+                xAndyPadding = 0F
+            ) {
+                CustomText(
+                    modifier = Modifier
+                        .padding(start = 8.dp, end = 8.dp, bottom = 0.dp, top = 0.dp),
+                    text = text,
+                    textColor = textColor
+                )
+            }
+        } else {
+            PressedStateButton(
                 width = width,
                 height = height,
                 text = text,
@@ -77,64 +86,12 @@ fun ElevatedButton(
                 bottomBackground = bottomBackground,
                 sideBackground = sideBackground
             )
-        } else {
-            SimpleButton(
-                width = width,
-                height = height,
-                backgroundColor = backgroundColor,
-                faceColor = faceColor,
-                xAndyPadding = 8F
-            ) {
-                CustomText(
-                    modifier = Modifier
-                        .padding(start = 8.dp, end = 0.dp, bottom = 6F.dp, top = 8.dp),
-                    text = text,
-                    textColor = textColor
-                )
-            }
         }
     }
 }
 
 @Composable
-fun SimpleButton(
-    width: Dp,
-    height: Dp,
-    backgroundColor: Color,
-    faceColor: Color,
-    xAndyPadding: Float,
-    textContent: @Composable BoxScope.() -> Unit
-) {
-    val modifier = Modifier
-        .width(width)
-        .height(height)
-
-    Box(
-        modifier = modifier
-            .background(faceColor),
-        contentAlignment = Alignment.Center
-    ) {
-        Canvas(
-            modifier = modifier
-                .background(backgroundColor)
-        ) {
-            val canvasHeight = size.height
-            val canvasWidth = size.width
-
-            val facePath = Path()
-            facePath.moveTo(x = xAndyPadding, y = xAndyPadding)
-            facePath.lineTo(x = canvasWidth, y = xAndyPadding)
-            facePath.lineTo(x = canvasWidth, y = canvasHeight)
-            facePath.lineTo(x = xAndyPadding, y = canvasHeight)
-            drawPath(facePath, faceColor)
-        }
-
-        textContent()
-    }
-}
-
-@Composable
-private fun PopUpButton(
+private fun PressedStateButton(
     width: Dp,
     height: Dp,
     text: String,
@@ -163,57 +120,39 @@ private fun PopUpButton(
             val padding = 8F
 
             val facePath = Path()
-            facePath.moveTo(x = 0F, y = 0F)
-            facePath.lineTo(x = canvasWidth - padding, y = 0F)
-            facePath.lineTo(x = canvasWidth - padding, y = canvasHeight - padding)
-            facePath.lineTo(x = 0F, y = canvasHeight - padding)
+            facePath.moveTo(x = padding, y = padding)
+            facePath.lineTo(x = canvasWidth, y = padding)
+            facePath.lineTo(x = canvasWidth, y = canvasHeight)
+            facePath.lineTo(x = padding, y = canvasHeight)
             drawPath(facePath, faceColor)
 
-            val sidePath = Path()
-            sidePath.moveTo(x = canvasWidth - padding, y = 0F)
-            sidePath.lineTo(x = canvasWidth - padding, y = canvasHeight - padding)
-            sidePath.lineTo(x = canvasWidth, y = canvasHeight)
-            sidePath.lineTo(x = canvasWidth, padding)
-            drawPath(sidePath, sideBackground)
+            val topPath = Path()
+            topPath.moveTo(x = 0F, y = 0F)
+            topPath.lineTo(x = canvasWidth, y = 0F)
+            topPath.lineTo(x = canvasWidth, y = padding)
+            topPath.lineTo(x = padding, padding)
+            drawPath(topPath, ColorSystem.grey_800)
 
-            val bottomPath = Path()
-            bottomPath.moveTo(x = 0F, y = canvasHeight - padding)
-            bottomPath.lineTo(x = padding, y = canvasHeight)
-            bottomPath.lineTo(x = canvasWidth, y = canvasHeight)
-            bottomPath.lineTo(x = canvasWidth - padding, y = canvasHeight - padding)
-            drawPath(bottomPath, bottomBackground)
+            val leftPath = Path()
+            leftPath.moveTo(x = 0F, y = 0F)
+            leftPath.lineTo(x = 0F, y = canvasHeight)
+            leftPath.lineTo(x = padding, y = canvasHeight)
+            leftPath.lineTo(x = padding, y = padding)
+            drawPath(leftPath, ColorSystem.grey_700)
 
         }
 
         CustomText(
             modifier = Modifier
-                .padding(start = 8.dp, end = 8.dp, bottom = 4.dp, top = 0.dp),
+                .padding(start = 8.dp, end = 0.dp, bottom = 0.dp, top = 8.dp),
             text = text,
             textColor = textColor
         )
     }
 }
 
-
-@Composable
-fun CustomText(
-    modifier: Modifier,
-    text: String,
-    textColor: Color
-) {
-    Text(
-        modifier = modifier,
-        text = text,
-        fontSize = 12.sp,
-        color = textColor,
-        maxLines = 1,
-        overflow = TextOverflow.Ellipsis,
-        textAlign = TextAlign.Center
-    )
-}
-
 @Preview()
 @Composable
-fun ElevatedButtonPreview() {
-    ElevatedButton("Click me") {}
+fun FlatButtonPreview() {
+    FlatButton("Click me") {}
 }
