@@ -31,6 +31,10 @@
             android:name=".coroutines.CoroutinePlayGround"
             android:theme="@style/Theme.TryNewThingsInAndroid"/>
 
+        <activity
+            android:name=".custom_components.CustomComponents"
+            android:theme="@style/Theme.TryNewThingsInAndroid"/>
+
     </application>
 
 </manifest>
