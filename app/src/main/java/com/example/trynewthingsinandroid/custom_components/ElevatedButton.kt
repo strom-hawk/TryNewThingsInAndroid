@@ -121,15 +121,11 @@ private fun SimpleButton(
             drawPath(facePath, faceColor)
         }
 
-        Text(
+        CustomText(
             modifier = Modifier
                 .padding(start = 8.dp, end = 8.dp, bottom = 0.dp, top = 0.dp),
             text = text,
-            fontSize = 12.sp,
-            color = textColor,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-            textAlign = TextAlign.Center
+            textColor = textColor
         )
     }
 }
@@ -186,15 +182,29 @@ private fun PopUpButton(
 
         }
 
-        Text(
+        CustomText(
             modifier = Modifier
-                .padding(start = 8.dp, end = 8.dp, bottom = 4.dp),
+                .padding(start = 8.dp, end = 8.dp, bottom = 4.dp, top = 0.dp),
             text = text,
-            fontSize = 12.sp,
-            color = textColor,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-            textAlign = TextAlign.Center
+            textColor = textColor
         )
     }
+}
+
+
+@Composable
+private fun CustomText(
+    modifier: Modifier,
+    text: String,
+    textColor: Color
+) {
+    Text(
+        modifier = modifier,
+        text = text,
+        fontSize = 12.sp,
+        color = textColor,
+        maxLines = 1,
+        overflow = TextOverflow.Ellipsis,
+        textAlign = TextAlign.Center
+    )
 }
