@@ -46,9 +46,15 @@ fun MainButtonCall() {
 
         }
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
         FlatButton("Click me") {
+
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        NonFloatingTiltButton("Click me") {
 
         }
     }

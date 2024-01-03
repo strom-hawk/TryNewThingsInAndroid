@@ -29,8 +29,8 @@ import com.example.trynewthingsinandroid.utils.ColorSystem
 @Composable
 fun FlatButton(
     text: String,
-    width: Dp = 150.dp,
-    height: Dp = 36.dp,
+    width: Dp = 160.dp,
+    height: Dp = 40.dp,
     textColor: Color = Color.Black,
     backgroundColor: Color = Color.Gray,
     faceColor: Color = ColorSystem.white,
