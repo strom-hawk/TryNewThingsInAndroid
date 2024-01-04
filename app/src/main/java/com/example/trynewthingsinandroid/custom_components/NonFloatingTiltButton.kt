@@ -128,6 +128,26 @@ private fun ElevatedStateNonFloatingButton(
             bottomFace.lineTo(x = canvasWidth, y = canvasHeight - 16F)
 
             drawPath(bottomFace, bottomBackground)
+
+            if(true) {
+                val startPoint = -11F
+                val margin = 10F
+                val leftShimmer = Path()
+                leftShimmer.moveTo(startPoint, 0F)
+                leftShimmer.lineTo(startPoint - 3.6F * margin, canvasHeight - 16F)
+                leftShimmer.lineTo((startPoint - 3.6F * margin) + margin, canvasHeight - 16F)
+                leftShimmer.lineTo(startPoint+margin, 0F)
+
+                drawPath(leftShimmer, textColor)
+
+                val rightShimmer = Path()
+                rightShimmer.moveTo(startPoint + (2 * margin), 0F)
+                rightShimmer.lineTo(startPoint - (1.5F * margin), canvasHeight - 16F)
+                rightShimmer.lineTo(startPoint + (1F * margin), canvasHeight - 16F)
+                rightShimmer.lineTo(startPoint + (4.5F * margin), 0F)
+
+                drawPath(rightShimmer, textColor)
+            }
         }
 
         CustomText(
@@ -190,6 +210,8 @@ private fun PressedStateNonFloatingButton(
 fun NonFloatingTiltButtonPreview() {
     NonFloatingTiltButton(
         text = "Click me",
-        bottomBackground = ColorSystem.grey_300
+        textColor = ColorSystem.white,
+        faceColor = ColorSystem.blue_300,
+        bottomBackground = ColorSystem.blue_700
     ) {}
 }

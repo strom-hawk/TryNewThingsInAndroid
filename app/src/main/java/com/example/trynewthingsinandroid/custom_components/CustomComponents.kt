@@ -18,7 +18,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.trynewthingsinandroid.ui.theme.TryNewThingsInAndroidTheme
+import com.example.trynewthingsinandroid.utils.ColorSystem
 
 class CustomComponents : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +44,7 @@ fun MainButtonCall() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        ElevatedButton("Click me") {
+        /*ElevatedButton("Click me") {
 
         }
 
@@ -57,6 +59,54 @@ fun MainButtonCall() {
         NonFloatingTiltButton("Click me") {
 
         }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        NonFloatingTiltButton(
+            text = "Click me",
+            textColor = ColorSystem.white,
+            faceColor = ColorSystem.blue_300,
+            bottomBackground = ColorSystem.blue_700
+        ) {}
+
+        Spacer(modifier = Modifier.height(16.dp))*/
+
+        CircularProgressBar(
+            text = "80 %",
+            fontSize = 24.sp,
+            diameter = 100.dp,
+            backgroundColor = ColorSystem.green_100,
+            foregroundColor = ColorSystem.green_500,
+            strokeWidth = 12F,
+            shouldFillBackground = true,
+            needBackgroundStroke = false
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        CircularProgressBar(
+            text = "80 %",
+            fontSize = 48.sp,
+            diameter = 200.dp,
+            backgroundColor = ColorSystem.green_100,
+            foregroundColor = ColorSystem.green_500,
+            strokeWidth = 50F,
+            shouldFillBackground = true,
+            needBackgroundStroke = false
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        CircularProgressBar(
+            text = "80 %",
+            fontSize = 50.sp,
+            diameter = 200.dp,
+            backgroundColor = ColorSystem.blue_100,
+            foregroundColor = ColorSystem.blue_500,
+            strokeWidth = 50F,
+            shouldFillBackground = false,
+            needBackgroundStroke = true
+        )
     }
 }
 
