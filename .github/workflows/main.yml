@@ -1,0 +1,7 @@
+name: Github Actions Workflow
+on: [push]
+jobs:
+  firstJob:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Loging first github action"
