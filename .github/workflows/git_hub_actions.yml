@@ -1,7 +1,29 @@
 name: Github Actions Workflow
 on: [push]
 jobs:
-  firstJob:
+  # Stage 1: Initialize the pipeline.
+  init:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Loging first github action"
+      - name: Initialize Workflow
+        run: echo "Initializing pipeline and preparing environment..."
+
+  # Stage 2: Build
+  build:
+    needs: init
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Make Gradle wrapper executable
+        run: chmod +x gradlew
+
+      - name: Build Android App
+        run: ./gradlew assembleDebug
