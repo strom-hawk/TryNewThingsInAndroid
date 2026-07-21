@@ -3,14 +3,21 @@ on: [push]
 jobs:
   # Stage 1: Initialize the pipeline.
   init:
+    name: Initialize
     runs-on: ubuntu-latest
     steps:
       - name: Initialize Workflow
         run: echo "Initializing pipeline and preparing environment..."
 
+  unit-test:
+    name: Unit Tests
+    needs: init
+    runs-on: ubuntu-latest
+
   # Stage 2: Build
   build:
-    needs: init
+    name: Build
+    needs: unit-test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
