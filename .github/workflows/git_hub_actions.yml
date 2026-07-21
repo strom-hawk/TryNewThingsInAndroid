@@ -13,6 +13,9 @@ jobs:
     name: Unit Tests
     needs: init
     runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
   # Stage 2: Build
   build:
