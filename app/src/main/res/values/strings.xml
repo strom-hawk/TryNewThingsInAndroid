@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">TryNewThingsInAndroid</string>
+    <string name="app_name">Walls</string>
+    <string name="toolbar_title">Walls</string>
 </resources>
